@@ -1,0 +1,97 @@
+package com.company;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.swing.*;
+
+public class Window extends JFrame {
+
+    private JFileChooser f = new JFileChooser();
+    private JPanel panel = new JPanel(new BorderLayout());
+
+    MenuBar menuBar = new MenuBar();
+    private MenuItem menuOpen;
+    private MenuItem menuSave;
+    private MenuItem menuExit;
+    private JTextArea theText;
+
+    public Window() {
+        super("Note");
+        initMenu();
+        initMainPanel();
+        initListeners();
+    }
+
+    private void initMenu() {
+        PopupMenu fileMenu = new PopupMenu("File");
+
+
+        menuOpen = new MenuItem("Open");
+        menuSave = new MenuItem("Save");
+        menuExit = new MenuItem("Exit");
+
+        fileMenu.add(menuOpen);
+        fileMenu.add(menuSave);
+        fileMenu.add(menuExit);
+
+
+        menuBar.add(fileMenu);
+        this.setMenuBar(menuBar);
+    }
+
+    private void initMainPanel() {
+        theText = new JTextArea();
+        panel.add(new JScrollPane(theText), BorderLayout.CENTER);
+        getContentPane().add(panel);
+    }
+
+    private void initListeners() {
+        this.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+
+
+        menuExit.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {
+                System.exit(0);
+            }
+        });
+
+        menuSave.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {
+                String output = theText.getText();
+                f.showOpenDialog(null);
+                File file = f.getSelectedFile();
+                try {
+                    FileOutputStream writer = new FileOutputStream(file);
+                    writer.write(output.getBytes());
+                } catch (IOException eq){eq.printStackTrace();}
+
+            }
+        });
+
+        menuOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {
+                JFileChooser open = new JFileChooser();
+                int option = open.showOpenDialog(open);
+                if (option == JFileChooser.APPROVE_OPTION) {
+                    theText.setText("");
+                    try {
+                        Scanner scan = new Scanner(new FileReader(open.getSelectedFile().getPath()));
+                        while (scan.hasNext())
+                            theText.setText(scan.nextLine() + "\n");
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+            }
+        });
+    }
+}
