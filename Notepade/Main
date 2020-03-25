@@ -1,0 +1,10 @@
+package com.company;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Window mainFrame = new Window();
+        mainFrame.setBounds(200,100,400,300);
+        mainFrame.setVisible(true);
+    }
+}
