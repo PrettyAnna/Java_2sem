@@ -1,0 +1,21 @@
+package com.company;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FileManager {
+
+    public static List<String> readPath(Path currentPath) {
+        List<String> readLines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(currentPath.toFile()))) {
+            while (reader.ready()) {
+                readLines.add(reader.readLine());
+            }
+        } catch (IOException ioEx) {
+            throw new UncheckedIOException(ioEx);
+        }
+        return readLines;
+    }
+}
