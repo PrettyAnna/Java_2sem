@@ -1,0 +1,61 @@
+package com.company;
+
+import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import java.nio.file.Path;
+import java.util.List;
+import static java.lang.System.lineSeparator;
+
+
+public class NotepadViewModel {
+
+    private Stage stage;
+    private TextArea textArea;
+    private Path currentFile;
+    private String loggedText = "";
+
+    NotepadViewModel(Stage stage, TextArea textArea) {
+        this.stage = stage;
+        this.textArea = textArea;
+    }
+
+
+    void save() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Txt files", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+        Path openedFile = fileChooser.showSaveDialog(stage).toPath();
+        if (openedFile != null) {
+            currentFile = openedFile;
+            FileManager.save(currentFile,
+                    textArea.getText().replaceAll("\n", lineSeparator()));
+        }
+    }
+
+
+    public void open() {
+        FileChooser fileChooser = new FileChooser();
+        currentFile = fileChooser.showOpenDialog(stage).toPath();
+        refill(FileManager.readPath(currentFile));
+        loggedText = textArea.getText();
+        stage.setTitle(currentFile.getFileName().toString() + " — Блокнот");
+    }
+
+
+    private void refill(List<String> contents) {
+        textArea.clear();
+        for (String line : contents) {
+            textArea.appendText(line + lineSeparator());
+        }
+    }
+
+
+    public void New() {
+        textArea.clear();
+        currentFile = null;
+        loggedText = textArea.getText();
+        stage.setTitle( "Безымянный — Блокнот");
+    }
+
+}
