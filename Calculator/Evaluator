@@ -1,0 +1,53 @@
+package ui;
+
+public class Evaluator {
+    public Evaluator() {
+    }
+
+    double evaluate(String expression) {
+        String left;
+        String right;
+        if (expression.contains("(")) {
+            left = expression.substring(0, expression.indexOf("("));
+            right = expression.substring(expression.lastIndexOf(")") + 1);
+            String mid = expression.substring(expression.indexOf("(") + 1, expression.lastIndexOf(")"));
+            return this.evaluate(left + this.evaluate(mid) + right);
+        } else if (expression.contains("+")) {
+            left = expression.substring(0, expression.indexOf("+"));
+            right = expression.substring(left.length() + 1);
+            return this.evaluate(left) + this.evaluate(right);
+        } else if (expression.contains("-")) {
+            left = expression.substring(0, expression.indexOf("-"));
+            right = expression.substring(left.length() + 1);
+            return this.evaluate(left) - this.evaluate(right);
+        } else if (expression.contains("*")) {
+            left = expression.substring(0, expression.indexOf("*"));
+            right = expression.substring(left.length() + 1);
+            return this.evaluate(left) * this.evaluate(right);
+        } else if (expression.contains("/")) {
+            left = expression.substring(0, expression.indexOf("/"));
+            right = expression.substring(left.length() + 1);
+            return this.evaluate(left) / this.evaluate(right);
+        } else if (expression.contains("^")) {
+            left = expression.substring(0, expression.indexOf("^"));
+            right = expression.substring(left.length() + 1);
+            return Math.pow(this.evaluate(left), this.evaluate(right));
+        } else if (expression.contains("√")) {
+            left = expression.substring(0, expression.indexOf("√"));
+            right = expression.substring(left.length() + 1);
+            return (left.length() == 0 ? 1.0D : this.evaluate(left)) * Math.sqrt(this.evaluate(right));
+        } else if (expression.contains("sin")) {
+            left = expression.substring(0, expression.indexOf("sin"));
+            right = expression.substring(left.length() + 3);
+            return (left.length() == 0 ? 1.0D : this.evaluate(left)) * Math.sin(this.evaluate(right));
+        } else if (expression.contains("cos")) {
+            left = expression.substring(0, expression.indexOf("cos"));
+            right = expression.substring(left.length() + 3);
+            return (left.length() == 0 ? 1.0D : this.evaluate(left)) * Math.cos(this.evaluate(right));
+        } else if (expression.equals("π")) {
+            return 3.141592653589793D;
+        } else {
+            return expression.length() == 0 ? 0.0D : Double.parseDouble(expression);
+        }
+    }
+}
