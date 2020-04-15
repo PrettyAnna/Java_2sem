@@ -1,0 +1,22 @@
+VBox {
+    -fx-padding: 15 15 5 15;
+    -fx-border-color: gray;
+    -fx-border-width: 5;
+}
+
+TextField {
+    -fx-min-height: 45px;
+    -fx-max-height: 45px;
+}
+
+GridPane {
+    -fx-padding: 0 0 0 0;
+    -fx-grid-lines-visible: true;
+}
+
+Button {
+    -fx-min-width: 65px;
+    -fx-min-height: 65px;
+    -fx-max-width: 65px;
+    -fx-max-height: 65px;
+}
