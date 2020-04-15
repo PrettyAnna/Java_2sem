@@ -1,0 +1,119 @@
+package ui;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+
+
+
+public class ViewModel {
+    @FXML
+    private Button btn0;
+    @FXML
+    private Button btn1;
+    @FXML
+    private Button btn2;
+    @FXML
+    private Button btn3;
+    @FXML
+    private Button btn4;
+    @FXML
+    private Button btn5;
+    @FXML
+    private Button btn6;
+    @FXML
+    private Button btn7;
+    @FXML
+    private Button btn8;
+
+    private int[][] myArray = new int[3][3];
+
+    private String winnerText = " ";
+
+
+    void checkTheButton(Button button, boolean turnCat) {
+        if (turnCat) {
+            if (button == btn0) {
+                myArray[0][0] = 7;
+            }
+            if (button == btn1) {
+                myArray[0][1] = 7;
+            }
+            if (button == btn2) {
+                myArray[0][2] = 7;
+            }
+            if (button == btn3) {
+                myArray[1][0] = 7;
+            }
+            if (button == btn4) {
+                myArray[1][1] = 7;
+            }
+            if (button == btn5) {
+                myArray[1][2] = 7;
+            }
+            if (button == btn6) {
+                myArray[2][0] = 7;
+            }
+            if (button == btn7) {
+                myArray[2][1] = 7;
+            }
+            if (button == btn8) {
+                myArray[2][2] = 7;
+            }
+        } else{
+            if (button == btn0) {
+                myArray[0][0] = 1;
+            }
+            if (button == btn1) {
+                myArray[0][1] = 1;
+            }
+            if (button == btn2) {
+                myArray[0][2] = 1;
+            }
+            if (button == btn3) {
+                myArray[1][0] = 1;
+            }
+            if (button == btn4) {
+                myArray[1][1] = 1;
+            }
+            if (button == btn5) {
+                myArray[1][2] = 1;
+            }
+            if (button == btn6) {
+                myArray[2][0] = 1;
+            }
+            if (button == btn7) {
+                myArray[2][1] = 1;
+            }
+            if (button == btn8) {
+                myArray[2][2] = 1;
+            }
+        }
+    }
+
+    String checkWin() {
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (((myArray[0][y] == 7) && (myArray[1][y] == 7) && (myArray[2][y] == 7)) ||
+                        ((myArray[x][0] == 7) && (myArray[x][1] == 7) && (myArray[x][2] == 7)) ||
+                        ((myArray[0][0] == 7) && (myArray[1][1] == 7) && (myArray[2][2] == 7)) ||
+                        ((myArray[2][0] == 7) && (myArray[1][1] == 7) && (myArray[0][2] == 7))) {
+                    winnerText = "Победили котики";
+                    break;
+                }
+            }
+        }
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                if (((myArray[0][y] == 1) && (myArray[1][y] == 1) && (myArray[2][y] == 1)) ||
+                        ((myArray[x][0] == 1) && (myArray[x][1] == 1) && (myArray[x][2] == 1)) ||
+                        ((myArray[0][0] == 1) && (myArray[1][1] == 1) && (myArray[2][2] == 1)) ||
+                        ((myArray[2][0] == 1) && (myArray[1][1] == 1) && (myArray[0][2] == 1))) {
+                    winnerText = "Победили пёсики";
+                    break;
+                }
+            }
+        }
+        return winnerText;
+    }
+
+}
