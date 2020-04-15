@@ -1,0 +1,39 @@
+package ui;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class Controller {
+
+    @FXML
+    private TextField expression;
+
+
+    private Image imageCat = new Image(getClass().getResourceAsStream("mur.jpg"));
+    private Image imageDog = new Image(getClass().getResourceAsStream("gav.png"));
+
+    private boolean turnCat = true;
+
+    private ViewModel viewModel = new ViewModel();
+
+
+    @FXML
+    private void click(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        viewModel.checkTheButton(button, turnCat);
+        if (turnCat) {
+            button.setGraphic(new ImageView(imageCat));
+            turnCat = false;
+        } else {
+            button.setGraphic(new ImageView(imageDog));
+            turnCat = true;
+        }
+        if (!viewModel.checkWin().equals(" ")){
+            this.expression.setText(viewModel.checkWin());
+        }
+    }
+}
