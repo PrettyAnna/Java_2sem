@@ -1,18 +1,11 @@
 package ui;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Paint;
-import javafx.util.Duration;
+
 
 public class Controller {
     @FXML
@@ -42,21 +35,8 @@ public class Controller {
     }
 
     @FXML
-    private void evaluate(ActionEvent e) {
-        try {
-            this.expression.setText(Double.toString(this.evaluator.evaluate(this.expression.getText())));
-        } catch (NumberFormatException var6) {
-            Background bg = this.expression.getBackground();
-            Background bgerr = new Background(new BackgroundFill(Paint.valueOf("ff7777"), CornerRadii.EMPTY, Insets.EMPTY));
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.0D), (event) -> {
-                this.expression.setBackground(bgerr);
-            }), new KeyFrame(Duration.seconds(0.5D), (event) -> {
-                this.expression.setBackground(bg);
-            }));
-            timeline.setCycleCount(1);
-            timeline.play();
-        }
-
+    private void evaluate(ActionEvent e) throws NumberFormatException {
+        this.expression.setText(Double.toString(this.evaluator.evaluate(this.expression.getText())));
         this.expression.positionCaret(this.expression.getText().length());
     }
 }
