@@ -1,0 +1,50 @@
+package ui;
+
+import javafx.event.ActionEvent;
+import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.nio.file.Path;
+import java.util.List;
+
+import static java.lang.System.lineSeparator;
+
+public class Controller {
+    public TextArea textArea;
+    private Stage stage;
+    private Path currentFile;
+
+    public void onSave(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Txt files", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+        currentFile = fileChooser.showSaveDialog(stage).toPath();
+        FileManager.save(currentFile,
+                textArea.getText().replaceAll("\n", lineSeparator()));
+
+    }
+
+    public void onNew(ActionEvent actionEvent) {
+        textArea.clear();
+        currentFile = null;
+        stage.setTitle( "NotePad");
+    }
+
+    public void onOpen(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        currentFile = fileChooser.showOpenDialog(stage).toPath();
+        refill(FileManager.readPath(currentFile));
+        stage.setTitle(currentFile.getFileName().toString() + " — NotePad");
+    }
+
+    private void refill(List<String> contents) {
+        textArea.clear();
+        for (String line : contents) {
+            textArea.appendText(line + lineSeparator());
+        }
+    }
+
+    public void onAbout(ActionEvent actionEvent) {
+    }
+}
