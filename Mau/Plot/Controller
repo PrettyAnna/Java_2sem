@@ -1,0 +1,42 @@
+package ui;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.io.IOException;
+
+public class Controller {
+    public void openAreaPlot(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("areaplot/areaPlot.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Диаграмма с областями");
+        primaryStage.setScene(new Scene(root, 400, 400));
+        primaryStage.show();
+    }
+
+    public void openLinePlot(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("lineplot/linePlot.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("График");
+        primaryStage.setScene(new Scene(root, 400, 400));
+        primaryStage.show();
+    }
+
+    public void openBubblePlot(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("bubbleplot/bubblePlot.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Пузырьковая диаграмма");
+        primaryStage.setScene(new Scene(root, 400, 400));
+        primaryStage.show();
+    }
+
+    public void openScatterPlot(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("scatterplot/scatterPlot.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Точечная диаграмма");
+        primaryStage.setScene(new Scene(root, 400, 400));
+        primaryStage.show();
+    }
+}
