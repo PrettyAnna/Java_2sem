@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.areaplot.AreaPlot">
+    <Button fx:id="dataAreaBtn" mnemonicParsing="false" onAction="#openDataArea" prefHeight="61.0" prefWidth="500.0" text="Выбор данных для диаграммы с областями" textAlignment="CENTER">
+        <font>
+          <Font size="14.0" />
+        </font>
+    </Button>
+    <AreaChart fx:id="areaPlot">
+      <xAxis>
+          <NumberAxis side="BOTTOM" />
+      </xAxis>
+      <yAxis>
+          <NumberAxis side="LEFT" />
+      </yAxis>
+    </AreaChart>
+</VBox>
