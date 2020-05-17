@@ -1,0 +1,21 @@
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<?import javafx.scene.chart.BubbleChart?>
+<VBox xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.bubbleplot.BubblePlot">
+    <Button mnemonicParsing="false" onAction="#openDataBubble" prefHeight="61.0" prefWidth="500.0" text="Выбор данных для пузырьковой диаграммы" textAlignment="CENTER">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+    <BubbleChart fx:id="bubblePlot">
+        <xAxis>
+            <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+            <NumberAxis side="LEFT" />
+        </yAxis>
+    </BubbleChart>
+</VBox>
