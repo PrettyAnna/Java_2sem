@@ -1,0 +1,25 @@
+package ui;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.XYChart.Data;
+import javafx.util.Pair;
+
+public class LineChartController {
+    private LineChartModel model = new LineChartModel();
+
+    public LineChartController() {
+    }
+
+    public ObservableList<Data> receivePoints(File file) throws IOException {
+        List<Pair<? extends Number, ? extends Number>> pairs = this.model.readData(file);
+        return FXCollections.observableArrayList((Collection)pairs.stream().map((pair) -> {
+            return new Data(pair.getKey(), pair.getValue());
+        }).collect(Collectors.toList()));
+    }
+}
