@@ -1,0 +1,44 @@
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:controller="ui.Controller"
+      xmlns:fx="http://javafx.com/fxml"
+      alignment="top_center"
+      stylesheets="@main.css"
+      styleClass="main">
+    <TextField
+            fx:id="expression"
+            alignment="baseline_right"
+            minHeight="45"
+            maxHeight="45"
+            onAction="#evaluate"/>
+    <GridPane alignment="center" hgap="5" vgap="5">
+        <Button text="⬅"   onAction="#clickBack"   fx:id="backspace"   GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Button text="7"   onAction="#clickSymbol" fx:id="number7"     GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Button text="4"   onAction="#clickSymbol" fx:id="number4"     GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Button text="1"   onAction="#clickSymbol" fx:id="number1"     GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Button text="C"   onAction="#clear"       fx:id="clear"       GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <Button text="("   onAction="#clickSymbol" fx:id="bracket"     GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Button text="8"   onAction="#clickSymbol" fx:id="number8"     GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Button text="5"   onAction="#clickSymbol" fx:id="number5"     GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Button text="2"   onAction="#clickSymbol" fx:id="number2"     GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button text="0"   onAction="#clickSymbol" fx:id="number0"     GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Button text=")"   onAction="#clickSymbol" fx:id="tekcarb"     GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <Button text="9"   onAction="#clickSymbol" fx:id="number9"     GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <Button text="6"   onAction="#clickSymbol" fx:id="number6"     GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+        <Button text="3"   onAction="#clickSymbol" fx:id="number3"     GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+        <Button text="."   onAction="#clickSymbol" fx:id="point"       GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+        <Button text="π"   onAction="#clickSymbol" fx:id="pi"          GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+        <Button text="/"   onAction="#clickSymbol" fx:id="divide"      GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Button text="*"   onAction="#clickSymbol" fx:id="multiply"    GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+        <Button text="-"   onAction="#clickSymbol" fx:id="minus"       GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+        <Button text="+"   onAction="#clickSymbol" fx:id="plus"        GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+        <Button text="√"   onAction="#clickSymbol" fx:id="root"        GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+        <Button text="^"   onAction="#clickSymbol" fx:id="power"       GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+        <Button text="sin" onAction="#clickSymbol" fx:id="sine"        GridPane.columnIndex="4" GridPane.rowIndex="2"/>
+        <Button text="cos" onAction="#clickSymbol" fx:id="cosine"      GridPane.columnIndex="4" GridPane.rowIndex="3"/>
+        <Button text="="   onAction="#evaluate"    fx:id="equal"       GridPane.columnIndex="4"  GridPane.rowIndex="4"/>
+    </GridPane>
+</VBox>
