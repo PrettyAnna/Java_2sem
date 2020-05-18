@@ -1,0 +1,86 @@
+package ui;
+
+import javafx.scene.control.Alert;
+
+
+public class Evaluator {
+
+
+    static double evaluate(String expression) {
+        String left;
+        String right;
+        Alert alert;
+        if (expression.contains("(")) {
+            if (expression.lastIndexOf(")") == -1){
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("Не хватает скобки!");
+            alert.showAndWait();
+            return 0;
+        } else{
+            left = expression.substring(0, expression.indexOf("("));
+            right = expression.substring(expression.lastIndexOf(")") + 1);
+            String mid = expression.substring(expression.indexOf("(") + 1, expression.lastIndexOf(")"));
+            return evaluate(left + evaluate(mid) + right);}
+        }
+        else if (expression.contains("/")) {
+            left = expression.substring(0, expression.indexOf("/"));
+            right = expression.substring(left.length() + 1);
+            if (evaluate(right) == 0) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("На ноль делить нельзя!");
+                alert.showAndWait();
+                return 0;
+            } else {
+                return evaluate(left) / evaluate(right);
+            }
+        }
+        else if (expression.contains("*")) {
+            left = expression.substring(0, expression.indexOf("*"));
+            right = expression.substring(left.length() + 1);
+            return evaluate(left) * evaluate(right);
+        }
+        else if (expression.contains("√")) {
+            left = expression.substring(0, expression.indexOf("√"));
+            right = expression.substring(left.length() + 1);
+            if (evaluate(right) < 0){
+                System.out.println("vze");
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setHeaderText("Корень из отрицательного числа не существует!");
+                alert.showAndWait();
+                return 0;
+            } else {
+                return (left.length() == 0 ? 1.0D : evaluate(left)) * Math.sqrt(evaluate(right));}
+        }
+        else if (expression.contains("^")) {
+            left = expression.substring(0, expression.indexOf("^"));
+            right = expression.substring(left.length() + 1);
+            return Math.pow(evaluate(left), evaluate(right));
+        }
+        else if (expression.contains("sin")) {
+            left = expression.substring(0, expression.indexOf("sin"));
+            right = expression.substring(left.length() + 3);
+            return (left.length() == 0 ? 1.0D : evaluate(left)) * Math.sin(evaluate(right));
+        }
+        else if (expression.contains("cos")) {
+            left = expression.substring(0, expression.indexOf("cos"));
+            right = expression.substring(left.length() + 3);
+            return (left.length() == 0 ? 1.0D : evaluate(left)) * Math.cos(evaluate(right));
+        }
+        else if (expression.contains("+")) {
+            left = expression.substring(0, expression.indexOf("+"));
+            right = expression.substring(left.length() + 1);
+            return evaluate(left) + evaluate(right);
+        }
+        else if (expression.contains("-")) {
+            left = expression.substring(0, expression.indexOf("-"));
+            right = expression.substring(left.length() + 1);
+            return (left.length() == 0 ? 0.0 : evaluate(left)) - evaluate(right);
+        }
+        else {
+            return expression.length() == 0 ? 0.0D : Double.parseDouble(expression);
+        }
+    }
+}
