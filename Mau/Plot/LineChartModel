@@ -16,16 +16,4 @@ public class LineChartModel {
             return new Pair<>(Integer.valueOf(splitted[0]), Integer.valueOf(splitted[1]));
         }).collect(Collectors.toList());
     }
-
-    public List<Pair<? extends Number, ? extends Number>> readData2(File file) throws IOException {
-        final List<String> lines = FileUtils.readAll(file);
-        final List<Pair<? extends Number, ? extends Number>> pairs = new ArrayList<>();
-
-        lines.forEach(line -> {
-            String[] splitted = line.split(",");
-            pairs.add(new Pair<>(Integer.valueOf(splitted[0]), Integer.valueOf(splitted[1])));
-        });
-
-        return pairs;
-    }
 }
